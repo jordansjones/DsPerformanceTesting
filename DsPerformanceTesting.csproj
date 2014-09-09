@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0382EE5A-EC0A-4170-9822-8D30AD95CE8C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DsPerformanceTesting</RootNamespace>
+    <AssemblyName>DsPerformanceTesting</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="C5">
+      <HintPath>..\packages\C5.2.3.0.1\lib\net40\C5.dll</HintPath>
+    </Reference>
+    <Reference Include="CsvHelper">
+      <HintPath>..\packages\CsvHelper.2.7.1\lib\net40-client\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Ploeh.AutoFixture">
+      <HintPath>..\packages\AutoFixture.3.20.1\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BenchmarkFactory.cs" />
+    <Compile Include="Benchmarks\Basic\Deletion_04_Benchmark.cs" />
+    <Compile Include="Benchmarks\Basic\Fetch_03_Benchmark.cs" />
+    <Compile Include="Benchmarks\Basic\Insertion_01_Benchmark.cs" />
+    <Compile Include="Benchmarks\Basic\Query_02_Benchmark.cs" />
+    <Compile Include="Benchmarks\Benchmark.cs" />
+    <Compile Include="Benchmarks\BenchmarkMeasurer.cs" />
+    <Compile Include="Benchmarks\BenchmarkResult.cs" />
+    <Compile Include="Benchmarks\BenchmarkRunner.cs" />
+    <Compile Include="Benchmarks\IBenchmark.cs" />
+    <Compile Include="Benchmarks\IBenchmarkMeasurer.cs" />
+    <Compile Include="Benchmarks\IBenchmarkRunner.cs" />
+    <Compile Include="Benchmarks\Measurement.cs" />
+    <Compile Include="CacheFactory.cs" />
+    <Compile Include="Classes\CacheKey.cs" />
+    <Compile Include="Classes\Caches\DtoC5HashDictionary.cs" />
+    <Compile Include="Classes\Caches\DtoConcurrentDictionary.cs" />
+    <Compile Include="Classes\Caches\DtoDictionary.cs" />
+    <Compile Include="Classes\Caches\DtoHashTable.cs" />
+    <Compile Include="Classes\Caches\DtoKeyedCollection.cs" />
+    <Compile Include="Classes\Caches\DtoSplayTree.cs" />
+    <Compile Include="Classes\Dtos\DtoKey.cs" />
+    <Compile Include="Classes\Dtos\GroupDto.cs" />
+    <Compile Include="Classes\Dtos\ManagedAccountDto.cs" />
+    <Compile Include="Classes\Dtos\ManagedSystemDto.cs" />
+    <Compile Include="Classes\Dtos\UserDto.cs" />
+    <Compile Include="Classes\Dtos\IServiceDto.cs" />
+    <Compile Include="Classes\Caches\DtoTree.cs" />
+    <Compile Include="Classes\ICache.cs" />
+    <Compile Include="Classes\ServiceDtoExtensions.cs" />
+    <Compile Include="DataFactory.cs" />
+    <Compile Include="Output\HtmlOutput.cs" />
+    <Compile Include="Output\IOutput.cs" />
+    <Compile Include="Output\MultiOutput.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
