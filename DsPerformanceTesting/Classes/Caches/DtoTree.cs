@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using C5;
@@ -7,7 +8,8 @@ namespace DsPerformanceTesting.Classes
 {
     public class DtoTree : ICache
     {
-
+        
+        private readonly object _locker = new object();
         private readonly TreeDictionary<CacheKey, IServiceDto> _cache = new TreeDictionary<CacheKey, IServiceDto>();
 
         public bool Enabled { get { return true; } }
@@ -17,32 +19,52 @@ namespace DsPerformanceTesting.Classes
             get { return "TreeDictionary"; }
         }
 
+        public void Reset(IEnumerable<IServiceDto> dtos)
+        {
+            _cache.Clear();
+            if (dtos.Any())
+            {
+                foreach (var dto in dtos)
+                {
+                    _cache[dto.GetCacheKey()] = dto;
+                }
+            }
+        }
+
         public void Add(IServiceDto dto)
         {
             var key = dto.GetCacheKey();
-            if (_cache.Contains(key))
+            using (TimedLock.Lock(_locker))
             {
-                Console.Error.WriteLine("Duplicate Key: {0}", key);
+                _cache.Add(key, dto);
             }
-            _cache.Add(key, dto);
         }
 
         public bool Contains(IServiceDto dto)
         {
             var key = dto.GetCacheKey();
-            return _cache.Contains(key);
+            using (TimedLock.Lock(_locker))
+            {
+                return _cache.Contains(key);
+            }
         }
 
         public IServiceDto Fetch(IServiceDto dto)
         {
             var key = dto.GetCacheKey();
-            return _cache[key];
+            using (TimedLock.Lock(_locker))
+            {
+                return _cache[key];
+            }
         }
 
         public void Remove(IServiceDto dto)
         {
             var key = dto.GetCacheKey();
-            _cache.Remove(key);
+            using (TimedLock.Lock(_locker))
+            {
+                _cache.Remove(key);
+            }
         }
 
         public void Dispose()

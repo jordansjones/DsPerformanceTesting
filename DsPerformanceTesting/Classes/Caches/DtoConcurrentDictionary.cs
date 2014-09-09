@@ -1,4 +1,6 @@
 ﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DsPerformanceTesting.Classes
 {
@@ -11,6 +13,18 @@ namespace DsPerformanceTesting.Classes
         public string Name
         {
             get { return "ConcurrentDictionary"; }
+        }
+
+        public void Reset(IEnumerable<IServiceDto> dtos)
+        {
+            _cache.Clear();
+            if (dtos.Any())
+            {
+                foreach (var dto in dtos)
+                {
+                    _cache[dto.GetCacheKey()] = dto;
+                }
+            }
         }
 
         public void Add(IServiceDto dto)

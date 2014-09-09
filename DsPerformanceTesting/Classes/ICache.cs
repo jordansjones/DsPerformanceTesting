@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DsPerformanceTesting.Classes
 {
@@ -8,6 +9,8 @@ namespace DsPerformanceTesting.Classes
         string Name { get; }
 
         bool Enabled { get; }
+
+        void Reset(IEnumerable<IServiceDto> dtos);
 
         void Add(IServiceDto dto);
 

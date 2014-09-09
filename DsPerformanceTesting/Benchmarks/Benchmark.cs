@@ -8,7 +8,12 @@ namespace DsPerformanceTesting.Benchmarks
     public abstract class Benchmark : IBenchmark
     {
 
+#if DEBUG
+        public const int LoopCount = 80;
+#else
         public const int LoopCount = 800 * 1000;
+#endif
+
 
         public string Name
         {
@@ -27,7 +32,7 @@ namespace DsPerformanceTesting.Benchmarks
         public virtual void Warmup(ICache cache)
         { }
 
-        public virtual IEnumerable<IServiceDto> GetTestData()
+        public virtual IReadOnlyList<IServiceDto> GetTestData()
         {
             return DataFactory.ServiceDtos;
         }

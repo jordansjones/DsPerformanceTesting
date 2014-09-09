@@ -15,7 +15,9 @@ namespace DsPerformanceTesting.Benchmarks
 
         public ICache Cache { get; private set; }
 
-        public Measurement Result { get; set; }
+        public Measurement SingleResult { get; set; }
+
+        public Measurement MultiResult { get; set; }
 
     }
 }

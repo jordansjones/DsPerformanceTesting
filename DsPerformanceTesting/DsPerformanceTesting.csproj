@@ -53,12 +53,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BenchmarkFactory.cs" />
+    <Compile Include="Benchmarks\BaseMeasurer.cs" />
     <Compile Include="Benchmarks\Basic\Deletion_04_Benchmark.cs" />
     <Compile Include="Benchmarks\Basic\Fetch_03_Benchmark.cs" />
     <Compile Include="Benchmarks\Basic\Insertion_01_Benchmark.cs" />
     <Compile Include="Benchmarks\Basic\Query_02_Benchmark.cs" />
     <Compile Include="Benchmarks\Benchmark.cs" />
-    <Compile Include="Benchmarks\BenchmarkMeasurer.cs" />
+    <Compile Include="Benchmarks\MultiThreadedBenchmarkMeasurer.cs" />
+    <Compile Include="Benchmarks\SingleThreadedBenchmarkMeasurer.cs" />
     <Compile Include="Benchmarks\BenchmarkResult.cs" />
     <Compile Include="Benchmarks\BenchmarkRunner.cs" />
     <Compile Include="Benchmarks\IBenchmark.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Classes\Caches\DtoDictionary.cs" />
     <Compile Include="Classes\Caches\DtoHashTable.cs" />
     <Compile Include="Classes\Caches\DtoKeyedCollection.cs" />
+    <Compile Include="Classes\Caches\DtoMultikeyDictionary.cs" />
     <Compile Include="Classes\Caches\DtoSplayTree.cs" />
     <Compile Include="Classes\Dtos\DtoKey.cs" />
     <Compile Include="Classes\Dtos\GroupDto.cs" />
@@ -88,6 +91,7 @@
     <Compile Include="Output\MultiOutput.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimedLock.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

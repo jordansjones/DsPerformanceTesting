@@ -41,8 +41,9 @@ namespace DsPerformanceTesting.Output
                             var containerResult = resultsOfBenchmark.First(r => r.Cache == container);
 
                             writer.Write(
-                                "<td style=\"text-align:right;\"><span title=\"Single thread\">{0}</span></td>",
-                                containerResult.Result);
+                                "<td style=\"text-align:right;\"><span title=\"Single thread\">{0}</span> / <span title=\"Multi thread\">{1}</span></td>",
+                                containerResult.SingleResult,
+                                containerResult.MultiResult);
                         }
 
                         writer.WriteLine("</tr></tbody>");

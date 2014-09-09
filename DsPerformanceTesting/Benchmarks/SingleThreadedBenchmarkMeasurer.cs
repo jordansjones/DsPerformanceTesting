@@ -5,32 +5,16 @@ using DsPerformanceTesting.Classes;
 
 namespace DsPerformanceTesting.Benchmarks
 {
-    public class BenchmarkMeasurer : IBenchmarkMeasurer
+    public class SingleThreadedBenchmarkMeasurer : BaseMeasurer
     {
 
-        public const int TimeLimit = 3 * 60 * 1000;
 
-        private readonly ICache _cache;
-        private readonly IBenchmark _benchmark;
-
-        public BenchmarkMeasurer(ICache cache, IBenchmark benchmark)
-        {
-            _cache = cache;
-            _benchmark = benchmark;
-        }
-
-        public ICache Cache
-        {
-            get { return _cache; }
-        }
-
-        public IBenchmark Benchmark
-        {
-            get { return _benchmark; }
-        }
+        public SingleThreadedBenchmarkMeasurer(ICache cache, IBenchmark benchmark)
+            :base(cache, benchmark)
+        {}
 
 
-        public Measurement Measure()
+        public override Measurement Measure()
         {
             CollectMemory();
 
@@ -52,7 +36,7 @@ namespace DsPerformanceTesting.Benchmarks
                         result.Time = watch.ElapsedMilliseconds * Benchmarks.Benchmark.LoopCount / i;
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine(
-                            " Benchmark '{0}' was stopped after {1:f1} minutes. {2} of {3} operations completed. Estimated execution time would have taken {4:f1} minutes.",
+                            " Benchmark '{0}' (single) was stopped after {1:f1} minutes. {2} of {3} operations completed. Estimated execution time would have taken {4:f1} minutes.",
                             Benchmark.Name,
                             (double) watch.ElapsedMilliseconds / (1000 * 60),
                             i,
@@ -88,13 +72,6 @@ namespace DsPerformanceTesting.Benchmarks
             }
 
             return result;
-        }
-
-        public void CollectMemory()
-        {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
         }
 
 

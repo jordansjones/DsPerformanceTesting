@@ -33,9 +33,10 @@ namespace DsPerformanceTesting
                     cacheResults.Add(result);
 
                     Console.WriteLine(
-                        " {0} {1,10}",
+                        " {0} {1,10} / {2}",
                         result.Benchmark.Name,
-                        result.Result);
+                        result.SingleResult,
+                        result.MultiResult);
                 }
 
                 cache.Dispose();
@@ -52,6 +53,11 @@ namespace DsPerformanceTesting
             output.Create(benchmarks, results);
 
             Console.WriteLine("Done");
+#if DEBUG
+            Console.ReadLine();
+
+#endif
+
         }
     }
 }

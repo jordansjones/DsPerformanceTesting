@@ -11,9 +11,16 @@ namespace DsPerformanceTesting.Benchmarks
 
         int Order { get; }
 
+        void Warmup(ICache cache);
+
         void DoAction(ICache cache, IServiceDto serviceDto);
 
-        IEnumerable<IServiceDto> GetTestData();
+        IReadOnlyList<IServiceDto> GetTestData();
+
+    }
+
+    public interface IOrdered
+    {
 
     }
 }
